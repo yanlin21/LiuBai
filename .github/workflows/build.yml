@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build without code signing
+        run: |
+          xcodebuild \
+            -project LiuBai.xcodeproj \
+            -scheme LiuBai \
+            -configuration Debug \
+            -derivedDataPath .build/ci \
+            CODE_SIGNING_ALLOWED=NO \
+            DEVELOPMENT_TEAM=CI00000000 \
+            ENABLE_USER_SCRIPT_SANDBOXING=NO \
+            OTHER_SWIFT_FLAGS=-disable-sandbox \
+            build

@@ -1,0 +1,385 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000001 /* LiuBaiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000001 /* LiuBaiApp.swift */; };
+		A10000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000002 /* ContentView.swift */; };
+		A10000000000000000000003 /* ComfortableTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000003 /* ComfortableTextEditor.swift */; };
+		A10000000000000000000004 /* NativeVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000004 /* NativeVisualEffectView.swift */; };
+		A10000000000000000000005 /* TodoEdgePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000005 /* TodoEdgePanel.swift */; };
+		A10000000000000000000006 /* TodoPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* TodoPalette.swift */; };
+		A10000000000000000000007 /* WindowGlassConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000007 /* WindowGlassConfigurator.swift */; };
+		A10000000000000000000008 /* WritingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000008 /* WritingStore.swift */; };
+		A10000000000000000000009 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000009 /* Models.swift */; };
+		A1000000000000000000000A /* SharedDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30000000000000000000001 /* SharedDataLocation.swift */; };
+		A20000000000000000000001 /* LiuBaiWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000000000000000000001 /* LiuBaiWidgetBundle.swift */; };
+		A20000000000000000000002 /* SharedTodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000000000000000000002 /* SharedTodoRepository.swift */; };
+		A20000000000000000000003 /* TodoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000000000000000000003 /* TodoWidget.swift */; };
+		A20000000000000000000004 /* TodoWidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000000000000000000004 /* TodoWidgetIntent.swift */; };
+		A20000000000000000000005 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000009 /* Models.swift */; };
+		A20000000000000000000006 /* TodoPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* TodoPalette.swift */; };
+		A20000000000000000000007 /* SharedDataLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30000000000000000000001 /* SharedDataLocation.swift */; };
+		A30000000000000000000001 /* LiuBai.icns in Resources */ = {isa = PBXBuildFile; fileRef = F50000000000000000000001 /* LiuBai.icns */; };
+		A40000000000000000000001 /* LiuBaiWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F60000000000000000000002 /* LiuBaiWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C10000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = P10000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = T20000000000000000000001;
+			remoteInfo = LiuBaiWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B10000000000000000000004 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A40000000000000000000001 /* LiuBaiWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F10000000000000000000001 /* LiuBaiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiuBaiApp.swift; sourceTree = "<group>"; };
+		F10000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F10000000000000000000003 /* ComfortableTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComfortableTextEditor.swift; sourceTree = "<group>"; };
+		F10000000000000000000004 /* NativeVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeVisualEffectView.swift; sourceTree = "<group>"; };
+		F10000000000000000000005 /* TodoEdgePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEdgePanel.swift; sourceTree = "<group>"; };
+		F10000000000000000000006 /* TodoPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPalette.swift; sourceTree = "<group>"; };
+		F10000000000000000000007 /* WindowGlassConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowGlassConfigurator.swift; sourceTree = "<group>"; };
+		F10000000000000000000008 /* WritingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingStore.swift; sourceTree = "<group>"; };
+		F10000000000000000000009 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		F20000000000000000000001 /* LiuBaiWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiuBaiWidgetBundle.swift; sourceTree = "<group>"; };
+		F20000000000000000000002 /* SharedTodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTodoRepository.swift; sourceTree = "<group>"; };
+		F20000000000000000000003 /* TodoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoWidget.swift; sourceTree = "<group>"; };
+		F20000000000000000000004 /* TodoWidgetIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoWidgetIntent.swift; sourceTree = "<group>"; };
+		F30000000000000000000001 /* SharedDataLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataLocation.swift; sourceTree = "<group>"; };
+		F40000000000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F40000000000000000000002 /* WidgetInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WidgetInfo.plist; sourceTree = "<group>"; };
+		F40000000000000000000003 /* LiuBai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiuBai.entitlements; sourceTree = "<group>"; };
+		F40000000000000000000004 /* LiuBaiWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiuBaiWidget.entitlements; sourceTree = "<group>"; };
+		F50000000000000000000001 /* LiuBai.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LiuBai.icns; sourceTree = "<group>"; };
+		F60000000000000000000001 /* 留白.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "留白.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F60000000000000000000002 /* LiuBaiWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiuBaiWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B10000000000000000000002 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		B20000000000000000000002 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G10000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				G20000000000000000000001 /* Sources */,
+				G30000000000000000000001 /* AppBundle */,
+				G40000000000000000000001 /* Assets */,
+				G50000000000000000000001 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G20000000000000000000001 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				G21000000000000000000001 /* LiuBai */,
+				G22000000000000000000001 /* LiuBaiWidget */,
+				G23000000000000000000001 /* Shared */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		G21000000000000000000001 /* LiuBai */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000001 /* LiuBaiApp.swift */,
+				F10000000000000000000002 /* ContentView.swift */,
+				F10000000000000000000003 /* ComfortableTextEditor.swift */,
+				F10000000000000000000004 /* NativeVisualEffectView.swift */,
+				F10000000000000000000005 /* TodoEdgePanel.swift */,
+				F10000000000000000000006 /* TodoPalette.swift */,
+				F10000000000000000000007 /* WindowGlassConfigurator.swift */,
+				F10000000000000000000008 /* WritingStore.swift */,
+				F10000000000000000000009 /* Models.swift */,
+			);
+			path = LiuBai;
+			sourceTree = "<group>";
+		};
+		G22000000000000000000001 /* LiuBaiWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F20000000000000000000001 /* LiuBaiWidgetBundle.swift */,
+				F20000000000000000000002 /* SharedTodoRepository.swift */,
+				F20000000000000000000003 /* TodoWidget.swift */,
+				F20000000000000000000004 /* TodoWidgetIntent.swift */,
+			);
+			path = LiuBaiWidget;
+			sourceTree = "<group>";
+		};
+		G23000000000000000000001 /* Shared */ = {
+			isa = PBXGroup;
+			children = (F30000000000000000000001 /* SharedDataLocation.swift */, );
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		G30000000000000000000001 /* AppBundle */ = {
+			isa = PBXGroup;
+			children = (
+				F40000000000000000000001 /* Info.plist */,
+				F40000000000000000000002 /* WidgetInfo.plist */,
+				F40000000000000000000003 /* LiuBai.entitlements */,
+				F40000000000000000000004 /* LiuBaiWidget.entitlements */,
+			);
+			path = AppBundle;
+			sourceTree = "<group>";
+		};
+		G40000000000000000000001 /* Assets */ = {
+			isa = PBXGroup;
+			children = (F50000000000000000000001 /* LiuBai.icns */, );
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		G50000000000000000000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F60000000000000000000001 /* 留白.app */,
+				F60000000000000000000002 /* LiuBaiWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		T10000000000000000000001 /* LiuBai */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L20000000000000000000001 /* Build configuration list for PBXNativeTarget "LiuBai" */;
+			buildPhases = (
+				B10000000000000000000001 /* Sources */,
+				B10000000000000000000002 /* Frameworks */,
+				B10000000000000000000003 /* Resources */,
+				B10000000000000000000004 /* Embed Foundation Extensions */,
+			);
+			buildRules = ();
+			dependencies = (D10000000000000000000001 /* PBXTargetDependency */, );
+			name = LiuBai;
+			productName = "留白";
+			productReference = F60000000000000000000001 /* 留白.app */;
+			productType = "com.apple.product-type.application";
+		};
+		T20000000000000000000001 /* LiuBaiWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L30000000000000000000001 /* Build configuration list for PBXNativeTarget "LiuBaiWidget" */;
+			buildPhases = (B20000000000000000000001 /* Sources */, B20000000000000000000002 /* Frameworks */, );
+			buildRules = ();
+			dependencies = ();
+			name = LiuBaiWidget;
+			productName = LiuBaiWidget;
+			productReference = F60000000000000000000002 /* LiuBaiWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P10000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					T10000000000000000000001 = {CreatedOnToolsVersion = 27.0; };
+					T20000000000000000000001 = {CreatedOnToolsVersion = 27.0; };
+				};
+			};
+			buildConfigurationList = L10000000000000000000001 /* Build configuration list for PBXProject "LiuBai" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = zh_CN;
+			hasScannedForEncodings = 0;
+			knownRegions = (zh_CN, en, Base, );
+			mainGroup = G10000000000000000000001;
+			productRefGroup = G50000000000000000000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (T10000000000000000000001 /* LiuBai */, T20000000000000000000001 /* LiuBaiWidget */, );
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B10000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (A30000000000000000000001 /* LiuBai.icns in Resources */, );
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B10000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000001 /* LiuBaiApp.swift in Sources */,
+				A10000000000000000000002 /* ContentView.swift in Sources */,
+				A10000000000000000000003 /* ComfortableTextEditor.swift in Sources */,
+				A10000000000000000000004 /* NativeVisualEffectView.swift in Sources */,
+				A10000000000000000000005 /* TodoEdgePanel.swift in Sources */,
+				A10000000000000000000006 /* TodoPalette.swift in Sources */,
+				A10000000000000000000007 /* WindowGlassConfigurator.swift in Sources */,
+				A10000000000000000000008 /* WritingStore.swift in Sources */,
+				A10000000000000000000009 /* Models.swift in Sources */,
+				A1000000000000000000000A /* SharedDataLocation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B20000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20000000000000000000001 /* LiuBaiWidgetBundle.swift in Sources */,
+				A20000000000000000000002 /* SharedTodoRepository.swift in Sources */,
+				A20000000000000000000003 /* TodoWidget.swift in Sources */,
+				A20000000000000000000004 /* TodoWidgetIntent.swift in Sources */,
+				A20000000000000000000005 /* Models.swift in Sources */,
+				A20000000000000000000006 /* TodoPalette.swift in Sources */,
+				A20000000000000000000007 /* SharedDataLocation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D10000000000000000000001 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = T20000000000000000000001 /* LiuBaiWidget */; targetProxy = C10000000000000000000001 /* PBXContainerItemProxy */; };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C20000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C20000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C30000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = AppBundle/LiuBai.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
+				ENABLE_HARDENED_RUNTIME = YES;
+				EXECUTABLE_NAME = LiuBai;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AppBundle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks", );
+				MARKETING_VERSION = 0.12.0;
+				LIUBAI_APP_GROUP = "$(DEVELOPMENT_TEAM).liubai.shared";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.liubai.$(DEVELOPMENT_TEAM)";
+				PRODUCT_NAME = "留白";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		C30000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = AppBundle/LiuBai.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
+				ENABLE_HARDENED_RUNTIME = YES;
+				EXECUTABLE_NAME = LiuBai;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AppBundle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks", );
+				MARKETING_VERSION = 0.12.0;
+				LIUBAI_APP_GROUP = "$(DEVELOPMENT_TEAM).liubai.shared";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.liubai.$(DEVELOPMENT_TEAM)";
+				PRODUCT_NAME = "留白";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		C40000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = AppBundle/LiuBaiWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AppBundle/WidgetInfo.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../../../../Frameworks", );
+				MARKETING_VERSION = 0.12.0;
+				LIUBAI_APP_GROUP = "$(DEVELOPMENT_TEAM).liubai.shared";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.liubai.$(DEVELOPMENT_TEAM).widget";
+				PRODUCT_NAME = LiuBaiWidget;
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		C40000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = AppBundle/LiuBaiWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AppBundle/WidgetInfo.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../../../../Frameworks", );
+				MARKETING_VERSION = 0.12.0;
+				LIUBAI_APP_GROUP = "$(DEVELOPMENT_TEAM).liubai.shared";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.liubai.$(DEVELOPMENT_TEAM).widget";
+				PRODUCT_NAME = LiuBaiWidget;
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		L10000000000000000000001 /* Build configuration list for PBXProject "LiuBai" */ = {isa = XCConfigurationList; buildConfigurations = (C20000000000000000000001 /* Debug */, C20000000000000000000002 /* Release */, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		L20000000000000000000001 /* Build configuration list for PBXNativeTarget "LiuBai" */ = {isa = XCConfigurationList; buildConfigurations = (C30000000000000000000001 /* Debug */, C30000000000000000000002 /* Release */, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		L30000000000000000000001 /* Build configuration list for PBXNativeTarget "LiuBaiWidget" */ = {isa = XCConfigurationList; buildConfigurations = (C40000000000000000000001 /* Debug */, C40000000000000000000002 /* Release */, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = P10000000000000000000001 /* Project object */;
+}
