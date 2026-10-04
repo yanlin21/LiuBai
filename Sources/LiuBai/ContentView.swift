@@ -10,8 +10,10 @@ struct ContentView: View {
     @State private var historyVisible = false
     @State private var focusMode = false
     @State private var appearanceVisible = false
+    @State private var storySwitcherVisible = false
     @State private var toolbarHovered = false
     @State private var hoveredChapter: UUID?
+    @FocusState private var novelTitleFocused: Bool
     @StateObject private var todoPanelModel = TodoPanelModel()
 
     private let accent = Color(red: 0.43, green: 0.39, blue: 0.33)
@@ -53,6 +55,9 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: .newChapter)) { _ in
             store.addChapter()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .newNovel)) { _ in
+            createStory()
+        }
         .onReceive(NotificationCenter.default.publisher(for: .saveVersion)) { _ in
             store.createSnapshot(label: "手动保存")
         }
@@ -77,11 +82,15 @@ struct ContentView: View {
                 todoPanelModel.hideImmediately()
             }
         }
+        .onChange(of: store.selectedNovelID) { _, _ in
+            historyVisible = false
+            todoPanelModel.hideImmediately()
+        }
         .onOpenURL { url in
             guard url.scheme == "liubai", url.host == "todo",
                   let idText = url.pathComponents.dropFirst().first,
                   let id = UUID(uuidString: idText),
-                  store.currentTodoGroups.contains(where: { $0.id == id }) else { return }
+                  store.selectNovel(containingTodoGroup: id) else { return }
             todoPanelModel.selectedGroupID = id
             todoPanelModel.show()
         }
@@ -126,9 +135,24 @@ struct ContentView: View {
     private var sidebar: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 10) {
-                Image(systemName: "book.closed.fill")
-                    .font(.system(size: 14, weight: .semibold))
+                Button {
+                    storySwitcherVisible.toggle()
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: "book.closed.fill")
+                            .font(.system(size: 14, weight: .semibold))
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 7, weight: .bold))
+                    }
                     .foregroundStyle(accent)
+                    .frame(height: 24)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .help("切换故事")
+                .popover(isPresented: $storySwitcherVisible, arrowEdge: .bottom) {
+                    storySwitcherPanel
+                }
 
                 TextField("小说名", text: Binding(
                     get: { store.selectedNovel?.title ?? "" },
@@ -136,6 +160,17 @@ struct ContentView: View {
                 ))
                 .textFieldStyle(.plain)
                 .font(.system(size: 15, weight: .semibold))
+                .focused($novelTitleFocused)
+
+                Button(action: createStory) {
+                    Image(systemName: "plus")
+                        .font(.system(size: 11, weight: .semibold))
+                        .frame(width: 22, height: 22)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.secondary)
+                .help("新建故事")
             }
             .padding(.horizontal, 18)
             .padding(.top, 22)
@@ -177,6 +212,100 @@ struct ContentView: View {
         .overlay(alignment: .trailing) {
             Rectangle().fill(Color.primary.opacity(0.07)).frame(width: 1)
         }
+    }
+
+    private var storySwitcherPanel: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .firstTextBaseline) {
+                Text("故事")
+                    .font(.system(size: 14, weight: .semibold))
+                Spacer()
+                Text("\(store.novels.count) 本")
+                    .font(.system(size: 10.5, design: .rounded))
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(.horizontal, 14)
+            .padding(.top, 14)
+            .padding(.bottom, 10)
+
+            ScrollView {
+                LazyVStack(spacing: 4) {
+                    ForEach(store.novels) { novel in
+                        storyRow(novel)
+                    }
+                }
+                .padding(.horizontal, 8)
+                .padding(.bottom, 8)
+            }
+            .frame(maxHeight: 280)
+
+            Divider().opacity(0.55)
+
+            Button(action: createStory) {
+                Label("新建故事", systemImage: "plus")
+                    .font(.system(size: 12.5, weight: .medium))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .foregroundStyle(accent)
+            .padding(12)
+        }
+        .frame(width: 260)
+    }
+
+    private func storyRow(_ novel: Novel) -> some View {
+        let selected = novel.id == store.selectedNovelID
+        return Button {
+            store.selectNovel(novel.id)
+            storySwitcherVisible = false
+        } label: {
+            HStack(spacing: 10) {
+                Image(systemName: selected ? "book.closed.fill" : "book.closed")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(selected ? accent : Color.secondary)
+                    .frame(width: 18)
+
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(novel.title.isEmpty ? "未命名故事" : novel.title)
+                        .font(.system(size: 12.5, weight: selected ? .semibold : .regular))
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+                    Text("\(novel.chapters.count) 章 · \(novelCharacterCount(novel)) 字")
+                        .font(.system(size: 10.5, design: .rounded))
+                        .foregroundStyle(.tertiary)
+                }
+
+                Spacer(minLength: 6)
+
+                if selected {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundStyle(accent)
+                }
+            }
+            .padding(.horizontal, 9)
+            .padding(.vertical, 8)
+            .background(selected ? accent.opacity(0.11) : Color.clear, in: RoundedRectangle(cornerRadius: 8))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func createStory() {
+        store.addNovel()
+        storySwitcherVisible = false
+        DispatchQueue.main.async {
+            novelTitleFocused = true
+        }
+    }
+
+    private func novelCharacterCount(_ novel: Novel) -> Int {
+        novel.chapters
+            .map(\.text)
+            .joined()
+            .filter { !$0.isWhitespace && !$0.isNewline }
+            .count
     }
 
     private func chapterRow(_ chapter: Chapter) -> some View {
@@ -679,6 +808,7 @@ struct ContentView: View {
 }
 
 extension Notification.Name {
+    static let newNovel = Notification.Name("LiuBai.newNovel")
     static let newChapter = Notification.Name("LiuBai.newChapter")
     static let saveVersion = Notification.Name("LiuBai.saveVersion")
     static let toggleSidebar = Notification.Name("LiuBai.toggleSidebar")

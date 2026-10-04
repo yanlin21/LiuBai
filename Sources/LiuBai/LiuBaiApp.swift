@@ -33,6 +33,11 @@ struct LiuBaiApp: App {
         .defaultSize(width: 1120, height: 760)
         .commands {
             CommandGroup(replacing: .newItem) {
+                Button("新建故事") {
+                    NotificationCenter.default.post(name: .newNovel, object: nil)
+                }
+                .keyboardShortcut("n", modifiers: [.command, .shift])
+
                 Button("新建章节") {
                     NotificationCenter.default.post(name: .newChapter, object: nil)
                 }

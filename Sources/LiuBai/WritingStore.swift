@@ -16,6 +16,7 @@ final class WritingStore: ObservableObject {
 
     private var saveTask: Task<Void, Never>?
     private let fileURL: URL
+    private let selectedNovelDefaultsKey = "LiuBai.selectedNovelID"
 
     init() {
         SharedDataLocation.migrateLegacyLibraryIfNeeded()
@@ -40,6 +41,34 @@ final class WritingStore: ObservableObject {
 
     func selectChapter(_ id: UUID) {
         selectedChapterID = id
+    }
+
+    func selectNovel(_ id: UUID) {
+        guard let novel = novels.first(where: { $0.id == id }) else { return }
+        selectedNovelID = novel.id
+        selectedChapterID = novel.chapters.first?.id
+        persistSelectedNovel()
+    }
+
+    @discardableResult
+    func selectNovel(containingTodoGroup groupID: UUID) -> Bool {
+        guard let novel = novels.first(where: { novel in
+            novel.todoGroups.contains(where: { $0.id == groupID })
+        }) else { return false }
+        selectNovel(novel.id)
+        return true
+    }
+
+    @discardableResult
+    func addNovel() -> UUID {
+        let novel = Novel(
+            title: nextNovelTitle(),
+            chapters: [Chapter(title: "第一章", text: "")]
+        )
+        novels.append(novel)
+        selectNovel(novel.id)
+        scheduleSave(immediately: true)
+        return novel.id
     }
 
     func updateNovelTitle(_ title: String) {
@@ -207,6 +236,7 @@ final class WritingStore: ObservableObject {
         } else {
             selectedChapterID = selectedNovel?.chapters.first?.id
         }
+        persistSelectedNovel()
         saveState = .saved
     }
 
@@ -243,8 +273,14 @@ final class WritingStore: ObservableObject {
         } else {
             novels = [.welcome]
         }
-        selectedNovelID = novels.first?.id
-        selectedChapterID = novels.first?.chapters.first?.id
+        let rememberedNovelID = UserDefaults.standard
+            .string(forKey: selectedNovelDefaultsKey)
+            .flatMap(UUID.init(uuidString:))
+        selectedNovelID = novels.contains(where: { $0.id == rememberedNovelID })
+            ? rememberedNovelID
+            : novels.first?.id
+        selectedChapterID = selectedNovel?.chapters.first?.id
+        persistSelectedNovel()
     }
 
     private func scheduleSave(immediately: Bool = false) {
@@ -273,6 +309,22 @@ final class WritingStore: ObservableObject {
         } catch {
             saveState = .saving
         }
+    }
+
+    private func persistSelectedNovel() {
+        UserDefaults.standard.set(selectedNovelID?.uuidString, forKey: selectedNovelDefaultsKey)
+    }
+
+    private func nextNovelTitle() -> String {
+        let base = "新故事"
+        let existingTitles = Set(novels.map(\.title))
+        guard existingTitles.contains(base) else { return base }
+
+        var suffix = 2
+        while existingTitles.contains("\(base) \(suffix)") {
+            suffix += 1
+        }
+        return "\(base) \(suffix)"
     }
 
     private func chineseNumber(_ number: Int) -> String {
