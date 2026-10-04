@@ -69,7 +69,11 @@ private struct TodoWidgetView: View {
     }
 
     private func content(_ group: TodoGroup) -> some View {
-        VStack(alignment: .leading, spacing: family == .systemSmall ? 8 : 10) {
+        let maximumOffset = max(0, group.items.count - itemLimit)
+        let offset = min(SharedTodoRepository.widgetItemOffset(groupID: group.id), maximumOffset)
+        let visibleItems = Array(group.items.dropFirst(offset).prefix(itemLimit))
+
+        return VStack(alignment: .leading, spacing: family == .systemSmall ? 8 : 10) {
             HStack(alignment: .firstTextBaseline) {
                 Text(group.title.isEmpty ? "未命名清单" : group.title)
                     .font(.system(size: family == .systemSmall ? 15 : 17, weight: .semibold))
@@ -87,15 +91,48 @@ private struct TodoWidgetView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
             } else {
-                VStack(alignment: .leading, spacing: family == .systemSmall ? 7 : 9) {
-                    ForEach(Array(group.items.prefix(itemLimit))) { todo in
-                        todoRow(group: group, todo: todo)
+                HStack(alignment: .top, spacing: 7) {
+                    VStack(alignment: .leading, spacing: family == .systemSmall ? 7 : 9) {
+                        ForEach(visibleItems) { todo in
+                            todoRow(group: group, todo: todo)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    if maximumOffset > 0 {
+                        itemNavigator(group: group, offset: offset, maximumOffset: maximumOffset)
                     }
                 }
                 Spacer(minLength: 0)
             }
         }
         .padding(family == .systemSmall ? 13 : 16)
+    }
+
+    private func itemNavigator(group: TodoGroup, offset: Int, maximumOffset: Int) -> some View {
+        VStack(spacing: 4) {
+            Button(intent: MoveTodoWidgetItemsIntent(groupID: group.id, direction: -1)) {
+                Image(systemName: "chevron.up")
+                    .frame(width: 18, height: 18)
+            }
+            .buttonStyle(.plain)
+            .disabled(offset == 0)
+            .opacity(offset == 0 ? 0.28 : 0.78)
+
+            Text("\(offset + 1)/\(maximumOffset + 1)")
+                .font(.system(size: 8, weight: .medium, design: .rounded))
+                .monospacedDigit()
+                .foregroundStyle(.secondary)
+
+            Button(intent: MoveTodoWidgetItemsIntent(groupID: group.id, direction: 1)) {
+                Image(systemName: "chevron.down")
+                    .frame(width: 18, height: 18)
+            }
+            .buttonStyle(.plain)
+            .disabled(offset == maximumOffset)
+            .opacity(offset == maximumOffset ? 0.28 : 0.78)
+        }
+        .font(.system(size: 9, weight: .semibold))
     }
 
     private func todoRow(group: TodoGroup, todo: TodoItem) -> some View {

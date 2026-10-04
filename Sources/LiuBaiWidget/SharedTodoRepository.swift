@@ -1,6 +1,14 @@
 import Foundation
 
 enum SharedTodoRepository {
+    private static var widgetDefaults: UserDefaults {
+        UserDefaults(suiteName: SharedDataLocation.appGroupIdentifier) ?? .standard
+    }
+
+    private static func offsetKey(for groupID: UUID) -> String {
+        "widget.todo.offset.\(groupID.uuidString)"
+    }
+
     static func loadNovels() -> [Novel] {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -17,6 +25,17 @@ enum SharedTodoRepository {
         let groups = allGroups()
         guard let id else { return groups.first }
         return groups.first { $0.id == id } ?? groups.first
+    }
+
+    static func widgetItemOffset(groupID: UUID) -> Int {
+        max(0, widgetDefaults.integer(forKey: offsetKey(for: groupID)))
+    }
+
+    static func moveWidgetItems(groupID: UUID, by delta: Int) {
+        guard let group = group(id: groupID) else { return }
+        let current = widgetItemOffset(groupID: groupID)
+        let maximum = max(0, group.items.count - 1)
+        widgetDefaults.set(min(max(current + delta, 0), maximum), forKey: offsetKey(for: groupID))
     }
 
     static func toggleTodo(groupID: UUID, todoID: UUID) throws {

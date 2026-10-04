@@ -76,3 +76,32 @@ struct ToggleTodoWidgetIntent: AppIntent {
         return .result()
     }
 }
+
+struct MoveTodoWidgetItemsIntent: AppIntent {
+    static var title: LocalizedStringResource = "滚动清单"
+    static var description = IntentDescription("在桌面小组件中向上或向下移动一行待办。")
+    static var openAppWhenRun = false
+
+    @Parameter(title: "清单 ID")
+    var groupID: String
+
+    @Parameter(title: "方向")
+    var direction: Int
+
+    init() {
+        groupID = ""
+        direction = 0
+    }
+
+    init(groupID: UUID, direction: Int) {
+        self.groupID = groupID.uuidString
+        self.direction = direction
+    }
+
+    func perform() async throws -> some IntentResult {
+        guard let groupUUID = UUID(uuidString: groupID), direction != 0 else { return .result() }
+        SharedTodoRepository.moveWidgetItems(groupID: groupUUID, by: direction > 0 ? 1 : -1)
+        WidgetCenter.shared.reloadAllTimelines()
+        return .result()
+    }
+}
