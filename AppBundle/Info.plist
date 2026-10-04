@@ -19,13 +19,13 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-	<string>0.13.0</string>
+	<string>0.13.1</string>
     <key>CFBundleSupportedPlatforms</key>
     <array>
         <string>MacOSX</string>
     </array>
     <key>CFBundleVersion</key>
-	<string>13</string>
+	<string>14</string>
     <key>LiuBaiAppGroup</key>
     <string>$(LIUBAI_APP_GROUP)</string>
     <key>DTPlatformName</key>

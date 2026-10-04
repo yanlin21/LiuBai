@@ -156,8 +156,8 @@ private struct TodoWidgetView: View {
     private var itemLimit: Int {
         switch family {
         case .systemSmall: 4
-        case .systemMedium: 6
-        case .systemLarge: 12
+        case .systemMedium: 5
+        case .systemLarge: 11
         default: 5
         }
     }
