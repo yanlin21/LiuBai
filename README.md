@@ -57,6 +57,8 @@ LIUBAI_TEAM_ID=你的TeamID ./build-app.sh
 
 先至少运行一次留白并建立一个清单，然后在 macOS 桌面右键，选择“编辑小组件”，搜索“留白清单”。每个小组件都可以单独选择一个标签。
 
+本地开发升级后如果小组件一直停在占位状态，请确认系统里只保留一份相同 Bundle ID 的应用，启动已签名的正式副本后再移除并重新添加小组件。重复的 `.app` 备份或旧构建产物可能让 WidgetKit 载入错误的扩展版本。
+
 ## 数据位置
 
 正文、历史版本与清单统一保存在 App Group 容器的 `LibraryData/library.json`。首次升级时，应用会自动尝试迁移旧位置 `~/Library/Application Support/LiuBai/library.json` 的数据。

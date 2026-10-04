@@ -18,13 +18,28 @@ struct TodoGroupEntity: AppEntity {
         title = group.title
         colorKey = group.colorKey
     }
+
+    init(requestedID: UUID, fallback group: TodoGroup) {
+        id = requestedID
+        title = group.title
+        colorKey = group.colorKey
+    }
 }
 
 struct TodoGroupEntityQuery: EntityQuery {
     func entities(for identifiers: [UUID]) async throws -> [TodoGroupEntity] {
-        SharedTodoRepository.allGroups()
-            .filter { identifiers.contains($0.id) }
-            .map(TodoGroupEntity.init)
+        let groups = SharedTodoRepository.allGroups()
+        guard let fallback = groups.first else { return [] }
+
+        return identifiers.map { identifier in
+            if let group = groups.first(where: { $0.id == identifier }) {
+                return TodoGroupEntity(group: group)
+            }
+            // WidgetKit may keep an old AppEntity identifier after its list was
+            // deleted or migrated. Resolve that identifier to a live group so
+            // the widget can render and its configuration can be edited again.
+            return TodoGroupEntity(requestedID: identifier, fallback: fallback)
+        }
     }
 
     func suggestedEntities() async throws -> [TodoGroupEntity] {

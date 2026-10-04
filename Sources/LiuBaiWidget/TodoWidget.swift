@@ -49,11 +49,22 @@ struct LiuBaiTodoWidget: Widget {
 
 private struct TodoWidgetView: View {
     @Environment(\.widgetFamily) private var family
+    @Environment(\.redactionReasons) private var redactionReasons
     let entry: TodoWidgetEntry
 
     var body: some View {
         Group {
-            if let group = entry.group {
+            if redactionReasons.contains(.placeholder) {
+                loadingState
+                    .unredacted()
+                    .containerBackground(for: .widget) {
+                        LinearGradient(
+                            colors: [Color.white.opacity(0.13), Color.white.opacity(0.035)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    }
+            } else if let group = entry.group {
                 content(group)
                     .widgetURL(URL(string: "liubai://todo/\(group.id.uuidString)"))
                     .containerBackground(for: .widget) {
@@ -73,7 +84,7 @@ private struct TodoWidgetView: View {
         let offset = min(SharedTodoRepository.widgetItemOffset(groupID: group.id), maximumOffset)
         let visibleItems = Array(group.items.dropFirst(offset).prefix(itemLimit))
 
-        return VStack(alignment: .leading, spacing: family == .systemSmall ? 8 : 10) {
+        return VStack(alignment: .leading, spacing: family == .systemSmall ? 10 : 14) {
             HStack(alignment: .firstTextBaseline) {
                 Text(group.title.isEmpty ? "未命名清单" : group.title)
                     .font(.system(size: family == .systemSmall ? 15 : 17, weight: .semibold))
@@ -91,8 +102,8 @@ private struct TodoWidgetView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
             } else {
-                HStack(alignment: .top, spacing: 7) {
-                    VStack(alignment: .leading, spacing: family == .systemSmall ? 7 : 9) {
+                HStack(alignment: .top, spacing: 10) {
+                    VStack(alignment: .leading, spacing: rowSpacing) {
                         ForEach(visibleItems) { todo in
                             todoRow(group: group, todo: todo)
                         }
@@ -106,11 +117,12 @@ private struct TodoWidgetView: View {
                 Spacer(minLength: 0)
             }
         }
-        .padding(family == .systemSmall ? 13 : 16)
+        .padding(.horizontal, family == .systemSmall ? 14 : 18)
+        .padding(.vertical, family == .systemSmall ? 13 : 16)
     }
 
     private func itemNavigator(group: TodoGroup, offset: Int, maximumOffset: Int) -> some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 6) {
             Button(intent: MoveTodoWidgetItemsIntent(groupID: group.id, direction: -1)) {
                 Image(systemName: "chevron.up")
                     .frame(width: 18, height: 18)
@@ -133,6 +145,7 @@ private struct TodoWidgetView: View {
             .opacity(offset == maximumOffset ? 0.28 : 0.78)
         }
         .font(.system(size: 9, weight: .semibold))
+        .opacity(0.72)
     }
 
     private func todoRow(group: TodoGroup, todo: TodoItem) -> some View {
@@ -155,10 +168,19 @@ private struct TodoWidgetView: View {
 
     private var itemLimit: Int {
         switch family {
-        case .systemSmall: 4
-        case .systemMedium: 5
+        case .systemSmall: 3
+        case .systemMedium: 4
+        case .systemLarge: 9
+        default: 4
+        }
+    }
+
+    private var rowSpacing: CGFloat {
+        switch family {
+        case .systemSmall: 9
+        case .systemMedium: 12
         case .systemLarge: 11
-        default: 5
+        default: 12
         }
     }
 
@@ -181,6 +203,25 @@ private struct TodoWidgetView: View {
         }
         .foregroundStyle(.secondary)
         .padding()
+    }
+
+    private var loadingState: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("留白")
+                    .font(.system(size: family == .systemSmall ? 15 : 17, weight: .semibold))
+                Spacer()
+                Circle()
+                    .fill(.secondary.opacity(0.45))
+                    .frame(width: 6, height: 6)
+            }
+            Spacer()
+            Text("正在载入清单…")
+                .font(.system(size: 12))
+                .foregroundStyle(.secondary)
+        }
+        .padding(.horizontal, family == .systemSmall ? 14 : 18)
+        .padding(.vertical, family == .systemSmall ? 13 : 16)
     }
 }
 

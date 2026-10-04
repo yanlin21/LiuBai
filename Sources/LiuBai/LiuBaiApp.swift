@@ -1,5 +1,6 @@
 import AppKit
 import SwiftUI
+import WidgetKit
 
 @main
 struct LiuBaiApp: App {
@@ -11,11 +12,15 @@ struct LiuBaiApp: App {
             ContentView()
                 .environmentObject(store)
                 .preferredColorScheme(nil)
+                .onAppear {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 .onDisappear { store.flush() }
                 .onChange(of: scenePhase) { _, phase in
                     switch phase {
                     case .active:
                         store.reloadFromDisk()
+                        WidgetCenter.shared.reloadAllTimelines()
                     case .inactive, .background:
                         store.flush()
                     @unknown default:
